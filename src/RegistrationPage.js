@@ -112,48 +112,51 @@ const RegistrationPage = () => {
     };
 
     return (
-        <div className="my-4 mx-2 register-form bg-white px-4 py-3 rounded-lg d-flex align-items-center justify-content-center h-100">
-            <form onSubmit={handleSubmit(onSubmit)}>
-
-                <div className="form-group">
-                    <label>Username</label>
+        <div className="w-full max-w-xs">
+            <form onSubmit={handleSubmit(onSubmit)} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 mt-4">
+            <h1 className="block text-gray-700 text-center text-xl font-bold mb-10">Registration Form</h1>
+                <div className="mb-4">
+                    <label className="block text-gray-700 text-sm font-bold mb-2">Username</label>
                     <input
                         name="username"
+                        placeholder="Username"
                         type="text"
                         {...register('username')}
-                        className={`form-control ${errors.username ? 'is-invalid' : ''}`}
+                        className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${errors.username ? 'is-invalid' : ''}`}
                     />
-                    <div className="invalid-feedback">{errors.username?.message}</div>
+                    <div className="text-sm text-red-500 font-bold ">{errors.username?.message}</div>
                 </div>
 
-                <div className="form-group">
-                    <label>Email</label>
+                <div className="mb-4">
+                    <label className="block text-gray-700 text-sm font-bold mb-2">Email</label>
                     <input
                         name="email"
+                        placeholder="Email"
                         type="text"
                         {...register('email')}
-                        className={`form-control ${errors.email ? 'is-invalid' : ''}`}
+                        className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline form-control ${errors.email ? 'is-invalid' : ''}`}
                     />
-                    <div className="invalid-feedback">{errors.email?.message}</div>
+                    <div className="text-sm text-red-500 font-bold ">{errors.email?.message}</div>
                 </div>
 
-                <div className="form-group">
-                    <label>Password</label>
+                <div className="mb-4">
+                    <label className="block text-gray-700 text-sm font-bold mb-2">Password</label>
                     <input
                         name="password"
+                        placeholder="Password"
                         type="password"
                         {...register('password')}
-                        className={`form-control ${errors.password ? 'is-invalid' : ''}`}
+                        className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline form-control ${errors.password ? 'is-invalid' : ''}`}
                     />
-                    <div className="invalid-feedback">{errors.password?.message}</div>
+                    <div className="text-sm text-red-500 font-bold ">{errors.password?.message}</div>
                 </div>
 
-                <div className="form-group">
-                    <label>role</label>
+                <div className="mb-4">
+                    <label className="block text-gray-700 text-sm font-bold mb-2">Select Role:</label>
                     <select name="role" id="role"
                         value="student"
                         {...register('role')}
-                        className={`form-control ${errors.role ? 'is-invalid' : ''}`}
+                        className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline form-control ${errors.role ? 'is-invalid' : ''}`}
                         value={userRole}
                         onChange={(e) => setUserRole(e.target.value)}
                     >
@@ -162,107 +165,113 @@ const RegistrationPage = () => {
                         <option value="schoolAdmin">SchoolAdmin</option>
                         <option value="superAdmin">SuperAdmin</option>
                     </select>
-                    <div className="invalid-feedback">{errors.role?.message}</div>
+                    <div className="text-sm text-red-500 font-bold ">{errors.role?.message}</div>
                 </div>
 
-                <div className="form-group">
-                    <label>Your Age</label>
+                <div className="mb-4">
+                    <label className="block text-gray-700 text-sm font-bold mb-2">Your Age</label>
                     <input
                         name="age"
+                        placeholder="Age"
                         type="number"
                         {...register('age')}
-                        className={`form-control ${errors.age ? 'is-invalid' : ''}`}
+                        className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline form-control ${errors.age ? 'is-invalid' : ''}`}
                     />
-                    <div className="invalid-feedback">{errors.conatct?.message}</div>
+                    <div className="text-sm text-red-500 font-bold ">{errors.conatct?.message}</div>
                 </div>
 
-                <div className="form-group">
-                    <label>Your address</label>
+                <div className="mb-4">
+                    <label className="block text-gray-700 text-sm font-bold mb-2">Your address</label>
                     <input
                         name="address"
+                        placeholder="Address"
                         type="text"
                         min={4}
                         {...register('address')}
-                        className={`form-control ${errors.address ? 'is-invalid' : ''}`}
+                        className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline form-control ${errors.address ? 'is-invalid' : ''}`}
                     />
-                    <div className="invalid-feedback">{errors.address?.message}</div>
+                    <div className="text-sm text-red-500 font-bold ">{errors.address?.message}</div>
                 </div>
 
                 {
                     userRole !== "schoolAdmin" &&
-                    <div className="form-group">
-                        <label>School Id</label>
+                    <div className="mb-4">
+                        <label className="block text-gray-700 text-sm font-bold mb-2">School Id</label>
                         <input
                             name="schoolId"
+                            placeholder="School Id"
                             type="text"
                             {...register('schoolId')}
-                            className={`form-control ${errors.schoolId ? 'is-invalid' : ''}`}
+                            className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline form-control ${errors.schoolId ? 'is-invalid' : ''}`}
                         />
-                        <div className="invalid-feedback">{errors.schoolId?.message}</div>
+                        <div className="text-sm text-red-500 font-bold ">{errors.schoolId?.message}</div>
                     </div>
                 }
 
 
                 {
                     userRole === "student" &&
-                    <div className="form-group">
-                        <label>Parent Name</label>
+                    <div className="mb-4">
+                        <label className="block text-gray-700 text-sm font-bold mb-2">Parent Name</label>
                         <input
                             name="parentName"
+                            placeholder="Parent Name"
                             type="text"
                             min={4}
                             {...register('parentName')}
-                            className={`form-control ${errors.parentName ? 'is-invalid' : ''}`}
+                            className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${errors.parentName ? 'is-invalid' : ''}`}
                         />
-                        <div className="invalid-feedback">{errors.parentName?.message}</div>
+                        <div className="text-sm text-red-500 font-bold ">{errors.parentName?.message}</div>
                     </div>
                 }
 
-                <div className="form-group">
+                <div className="mb-4">
                     {
                         userRole === "student"
-                            ? <label>Parent's conatct no.</label>
-                            : <label>Your conatct no.</label>
+                            ? <label className="block text-gray-700 text-sm font-bold mb-2">Parent's conatct no.</label>
+                            : <label className="block text-gray-700 text-sm font-bold mb-2">Your conatct no.</label>
                     }
                     <input
                         name="contactNo"
+                        placeholder="Contact Number"
                         type="tel"
                         {...register('contactNo')}
-                        className={`form-control ${errors.contactNo ? 'is-invalid' : ''}`}
+                        className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${errors.contactNo ? 'is-invalid' : ''}`}
                     />
-                    <div className="invalid-feedback">{errors.contactNo?.message}</div>
+                    <div className="text-sm text-red-500 font-bold ">{errors.contactNo?.message}</div>
                 </div>
 
                 {
                     userRole === "student" &&
-                    <div className="form-group">
-                        <label>Class</label>
+                    <div className="mb-4">
+                        <label className="block text-gray-700 text-sm font-bold mb-2">Your Class</label>
                         <input
                             name="className"
+                            placeholder="Class Name"
                             type="text"
                             {...register('className')}
-                            className={`form-control ${errors.className ? 'is-invalid' : ''}`}
+                            className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${errors.className ? 'is-invalid' : ''}`}
                         />
-                        <div className="invalid-feedback">{errors.className?.message}</div>
+                        <div className="text-sm text-red-500 font-bold ">{errors.className?.message}</div>
                     </div>
                 }
 
-                <div className="form-group">
-                    <button type="submit" className="btn btn-primary">
+                <div className="flex items-center justify-between mb-6">
+                    <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
                         Register
                     </button>
                     <button
                         type="button"
                         onClick={reset}
-                        className="btn btn-warning float-right"
+                        className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                     >
                         Reset
                     </button>
                 </div>
-                <div className='text-center '>
+                <div className='text-center  font-bold text-blue-500 text-xl '>
                     <h4>
                         <Link to="/login">
-                            Login
+                            Login Here
                         </Link>
                     </h4>
                 </div>
