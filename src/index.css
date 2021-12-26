@@ -1,0 +1,13 @@
+body {
+  background-color: #e2e8f0;
+  overflow-x: hidden ;
+}
+
+.App{
+  display:flex;
+  justify-content:center;
+  justify-content: center;
+  align-items: center;
+  
+}
+
