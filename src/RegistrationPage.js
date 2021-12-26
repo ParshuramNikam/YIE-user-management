@@ -88,7 +88,6 @@ const RegistrationPage = () => {
         if (data.age && data.age < 5) {
             alert("Age should be >= 5");
         }
-
         if (userRole === 'student') {
             if (!data.age || !data.address || !data.schoolId || !data.parentName || !data.className) {
                 console.log("student");
@@ -96,7 +95,6 @@ const RegistrationPage = () => {
                 return
             }
         }
-
         if (userRole === 'teacher' || userRole === 'schoolAdmin') {
             console.log("teacher");
             if (!data.age || !data.address || !data.schoolId) {
@@ -104,7 +102,6 @@ const RegistrationPage = () => {
                 return
             }
         }
-
 
         let backendUrl = 'http://localhost:5000';
         await fetch(`${backendUrl}/auth/signup`, {
