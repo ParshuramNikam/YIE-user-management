@@ -1,17 +1,40 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
-// import { useHistory } from "react-router-dom";
 import { useNavigate, Link } from "react-router-dom";
-// import "bootstrap/dist/css/bootstrap.min.css";
+import { useCookies } from 'react-cookie'
 
 
 const RegistrationPage = () => {
 
     const [userRole, setUserRole] = useState('student');
+    const [cookie] = useCookies(['yie_access_token']);
+    const [showForm, setShowForm] = useState(false);
     const navigate = useNavigate();
-    // const history = useHistory();
+
+    useEffect(() => {
+        console.log(cookie.yie_access_token);
+        if (!cookie.yie_access_token || cookie.yie_access_token.length === 0) {
+            navigate('/signup');
+        }
+
+        fetch("http://localhost:5000/auth", {
+            method: "POST",
+            credentials: "include"
+        }).then((res) => res.json())
+            .then((data) => {
+                if (data.status && data.status === "success") {
+                    navigate('/dashboard')
+                } else {
+                    setShowForm(true);
+                }
+            }).catch((err) => {
+                alert(err);
+                setShowForm(true);
+            })
+
+    }, [])
 
     const validationSchema = Yup.object().shape({
         // fullname: Yup.string().required('Fullname is required'),
@@ -24,8 +47,7 @@ const RegistrationPage = () => {
             .email('Email is invalid'),
         password: Yup.string()
             .required('Password is required')
-            .min(8, 'Password must be at least 6 characters')
-            .max(40, 'Password must not exceed 40 characters')
+            .min(8, 'Password must be at least 8 characters')
             .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9_])/, {
                 message: "Password must include atleast [a-z] [A-Z] [0-9] and 1 symbol",
                 excludeEmptyString: false,
@@ -61,8 +83,6 @@ const RegistrationPage = () => {
     });
 
     const onSubmit = async (data, e) => {
-
-
         console.log(JSON.stringify(data, null, 2));
 
         if (data.age && data.age < 5) {
@@ -106,15 +126,16 @@ const RegistrationPage = () => {
                     reset();
                 }
             })
-            .catch((err) => console.error(err))
-
-
+            .catch((err) => {
+                console.error(err);
+                alert(err);
+            })
     };
 
     return (
-        <div className="w-full max-w-xs">
+        showForm && <div className="w-full max-w-md">
             <form onSubmit={handleSubmit(onSubmit)} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 mt-4">
-            <h1 className="block text-gray-700 text-center text-xl font-bold mb-10">Registration Form</h1>
+                <h1 className="block text-gray-700 text-center text-xl font-bold mb-10">Registration Form</h1>
                 <div className="mb-4">
                     <label className="block text-gray-700 text-sm font-bold mb-2">Username</label>
                     <input
@@ -156,7 +177,7 @@ const RegistrationPage = () => {
                     <select name="role" id="role"
                         value="student"
                         {...register('role')}
-                        className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline form-control ${errors.role ? 'is-invalid' : ''}`}
+                        className={`form-select shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline form-control ${errors.role ? 'is-invalid' : ''}`}
                         value={userRole}
                         onChange={(e) => setUserRole(e.target.value)}
                     >
@@ -194,7 +215,7 @@ const RegistrationPage = () => {
                 </div>
 
                 {
-                    userRole !== "schoolAdmin" &&
+                    userRole !== "superAdmin" &&
                     <div className="mb-4">
                         <label className="block text-gray-700 text-sm font-bold mb-2">School Id</label>
                         <input

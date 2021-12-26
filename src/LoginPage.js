@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 
@@ -43,17 +43,14 @@ const LoginPage = () => {
         console.log("Submited")
     }
 
-    const disAbleButton = (value) => {
-        if (value === " ") return false;
-
-        return true;
-    }
-
+    useEffect(()=>{
+        
+    },[])
 
 
 
     return (
-        <div className="w-full max-w-xs">
+        <div className="max-w-lg min-h-screen flex items-center justify-center">
             <form onSubmit={handleSubmit} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
                 <h1 className="block text-gray-700 text-center text-xl font-bold mb-2">Login Form</h1>
                 <div className="mb-4">
