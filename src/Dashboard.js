@@ -68,7 +68,14 @@ const Dashboard = () => {
             }
         }).then(res => res.json())
             .then(result => {
-                console.log(result);
+                if(result.status && result.status==="failed"){
+                    setIsUpdating(true);
+                    alert(result.message);
+                    return;
+                }else{
+                    setUserDetails(result);
+                    console.log(result);
+                }
             })
     }
 
